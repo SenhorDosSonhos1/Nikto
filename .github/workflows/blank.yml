@@ -21,6 +21,8 @@ jobs:
     - name: Clone Nikto repository
       run: git clone https://github.com/sullo/nikto.git
 
+    - name: Change to Nikto directory
+      run: cd nikto
+
     - name: Run Nikto
-      run: |
-        perl nikto/nikto.pl -h http://juice-shop.herokuapp.com/
+      run: perl nikto.pl -h http://juice-shop.herokuapp.com/
