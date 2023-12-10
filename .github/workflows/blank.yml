@@ -18,14 +18,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y perl git
 
-    - name: Clone Nikto repository
-      run: git clone https://github.com/sullo/nikto.git
-
-    - name: Change to Nikto directory
-      run: cd nikto
-
     - name: Download nikto.pl
-      run: wget https://raw.githubusercontent.com/sullo/nikto/main/program/nikto.pl
+      run: |
+        curl -O https://raw.githubusercontent.com/sullo/nikto/main/program/nikto.pl
 
     - name: Run Nikto
       run: perl nikto.pl -h http://juice-shop.herokuapp.com/
