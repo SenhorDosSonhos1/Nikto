@@ -24,5 +24,8 @@ jobs:
     - name: Change to Nikto directory
       run: cd nikto
 
+    - name: List files in Nikto directory
+      run: ls
+
     - name: Run Nikto
       run: perl nikto.pl -h http://juice-shop.herokuapp.com/
