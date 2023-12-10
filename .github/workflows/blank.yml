@@ -13,15 +13,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Install Nikto dependencies
+    - name: Set up Perl
       run: |
         sudo apt-get update
-        sudo apt-get install -y libwhisker2-perl libhtml-template-perl
+        sudo apt-get install -y perl
+
+    - name: Navigate to Nikto directory
+      run: cd path/to/nikto
 
     - name: Run Nikto
       run: |
