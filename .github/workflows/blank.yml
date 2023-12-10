@@ -13,14 +13,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Perl
+    - name: Set up Perl and Git
       run: |
         sudo apt-get update
-        sudo apt-get install -y perl
+        sudo apt-get install -y perl git
 
-    - name: Navigate to Nikto directory
-      run: cd path/to/nikto
+    - name: Clone Nikto repository
+      run: git clone https://github.com/sullo/nikto.git
 
     - name: Run Nikto
       run: |
-        perl nikto.pl -h http://juice-shop.herokuapp.com/#/
+        perl nikto/nikto.pl -h http://juice-shop.herokuapp.com/
