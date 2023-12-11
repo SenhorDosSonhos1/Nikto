@@ -31,4 +31,4 @@ jobs:
         echo "EXECDIR = ." > nikto.conf
 
     - name: Run Nikto
-      run: perl nikto.pl -config nikto.conf -h http://juice-shop.herokuapp.com/ -e .
+      run: NIKTOEXECDIR=. perl nikto.pl -config nikto.conf -h http://juice-shop.herokuapp.com/
