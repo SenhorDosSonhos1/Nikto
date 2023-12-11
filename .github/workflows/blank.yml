@@ -22,5 +22,9 @@ jobs:
       run: |
         curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.pl
 
+    - name: Download default nikto.conf
+      run: |
+        curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.conf.default
+
     - name: Run Nikto
-      run: perl ./nikto.pl -h http://juice-shop.herokuapp.com/
+      run: perl nikto.pl -config nikto.conf.default -h http://juice-shop.herokuapp.com/
