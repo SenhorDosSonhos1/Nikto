@@ -26,5 +26,9 @@ jobs:
       run: |
         curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.conf.default
 
+    - name: Create nikto.conf
+      run: |
+        echo "EXECDIR = ." > nikto.conf
+
     - name: Run Nikto
-      run: perl nikto.pl -config nikto.conf.default -h http://juice-shop.herokuapp.com/
+      run: perl nikto.pl -config nikto.conf -h http://juice-shop.herokuapp.com/
