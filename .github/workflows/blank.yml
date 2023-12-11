@@ -20,7 +20,7 @@ jobs:
 
     - name: Download nikto.pl
       run: |
-        curl -O https://raw.githubusercontent.com/sullo/nikto/main/program/nikto.pl
+        curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.pl
 
     - name: Run Nikto
       run: perl nikto.pl -h http://juice-shop.herokuapp.com/
