@@ -20,25 +20,21 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
-        
+
       - name: Atualizar npm
         run: npm install -g npm@latest
 
       - name: Remover ZAP-CLI existente
-        run: npm uninstall -g zap-cli || true
+        run: sudo npm uninstall -g zap-cli || true
 
-      - name: Instalar build-essential
-        run: sudo apt-get install -y build-essential
-
-
+      - name: Instalar libxtst6
+        run: sudo apt-get install -y libxtst6
 
       - name: Instalar ZAP-CLI
-        run: sudo npm install -g zap-cli
-
+        run: sudo npm install -g zap-cli --unsafe-perm=true --allow-root
 
       - name: Executar análise do OWASP ZAP
         run: zap-cli --quickurl http://seusite.com -c 1 -r relatorio-owasp.html
-
 
       - name: Analisar resultado
         run: node analisar-linha.js
