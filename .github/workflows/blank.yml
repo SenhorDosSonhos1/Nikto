@@ -23,10 +23,8 @@ jobs:
         
       - name: Atualizar npm
         run: npm install -g npm@latest
-      
-      - name: Instalar ZAP-CLI
-        run: npm install -g zap-cli
 
+      
       - name: Instalar ZAP-CLI
         run: sudo npm install -g zap-cli
 
