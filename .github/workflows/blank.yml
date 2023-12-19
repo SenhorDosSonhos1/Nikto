@@ -1,4 +1,4 @@
-name: Nikto Scanner
+name: Análise de OWASP ZAP
 
 on:
   push:
@@ -6,31 +6,25 @@ on:
       - main
 
 jobs:
-  nikto-tests:
+  owasp-zap:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout do código
+        uses: actions/checkout@v2
 
-    - name: Set up Perl and Git
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y perl git
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
 
-    - name: Download nikto.pl
-      run: |
-        curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.pl
+      - name: Instalar dependências
+        run: npm install
 
-    - name: Download default nikto.conf
-      run: |
-        curl -O https://raw.githubusercontent.com/sullo/nikto/master/program/nikto.conf.default
+      - name: Executar análise do OWASP ZAP
+        run: |
+           zap-cli --quickurl https://juice-shop.herokuapp.com/#/ -c 1 -r relatorio-owasp.html
 
-    - name: Create nikto.conf
-      run: |
-        echo "EXECDIR = ." > nikto.conf
 
-    - name: Run Nikto
-      env:
-        NIKTOEXECDIR: .
-      run: perl nikto.pl -config nikto.conf -h http://juice-shop.herokuapp.com/
+      - name: Analisar resultado
+        run: node analisar-linha.js
