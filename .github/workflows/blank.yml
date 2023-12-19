@@ -20,12 +20,20 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
-
+        
+      - name: Atualizar npm
+        run: npm install -g npm@latest
+      
       - name: Instalar ZAP-CLI
         run: npm install -g zap-cli
 
+      - name: Instalar ZAP-CLI
+        run: sudo npm install -g zap-cli
+
+
       - name: Executar análise do OWASP ZAP
-        run: zap-cli --quickurl http://seusite.com -c 1 -r relatorio-owasp.html
+        run: npx zap-cli --quickurl http://seusite.com -c 1 -r relatorio-owasp.html
+
 
       - name: Analisar resultado
         run: node analisar-linha.js
