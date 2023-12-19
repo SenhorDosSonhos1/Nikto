@@ -24,13 +24,20 @@ jobs:
       - name: Atualizar npm
         run: npm install -g npm@latest
 
-      
+      - name: Remover ZAP-CLI existente
+        run: npm uninstall -g zap-cli || true
+
+      - name: Instalar build-essential
+        run: sudo apt-get install -y build-essential
+
+
+
       - name: Instalar ZAP-CLI
         run: sudo npm install -g zap-cli
 
 
       - name: Executar análise do OWASP ZAP
-        run: npx zap-cli --quickurl http://seusite.com -c 1 -r relatorio-owasp.html
+        run: zap-cli --quickurl http://seusite.com -c 1 -r relatorio-owasp.html
 
 
       - name: Analisar resultado
