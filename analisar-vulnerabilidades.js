@@ -1,26 +1,21 @@
 const fs = require('fs');
 
-const analisarVulnerabilidades = () => {
-  try {
-    // Ler o conteúdo do arquivo de saída do OWASP ZAP
-    const rawData = fs.readFileSync('zap-output.json');
-    const zapOutput = JSON.parse(rawData);
+// Carregar o conteúdo do arquivo JSON
+const jsonString = fs.readFileSync(process.argv[2]);
+const jsonData = JSON.parse(jsonString);
 
-    // Verificar se há vulnerabilidades de grau "alto" e "medium"
-    const possuiAlto = zapOutput.vulnerabilidades.some(vuln => vuln.grau === 'alto');
-    const possuiMedium = zapOutput.vulnerabilidades.some(vuln => vuln.grau === 'medium');
+// Verificar se a propriedade 'vulnerabilities' existe
+if (jsonData && jsonData.vulnerabilities && Array.isArray(jsonData.vulnerabilities)) {
+  // Fazer algo com jsonData.vulnerabilities
+  const temVulnerabilidades = jsonData.vulnerabilities.some(vulnerabilidade => {
+    return vulnerabilidade.severity === 'Medium' || vulnerabilidade.severity === 'High';
+  });
 
-    if (possuiAlto && possuiMedium) {
-      console.log('Encontrou vulnerabilidades de grau alto e medium. Ação OK.');
-    } else if (possuiAlto || possuiMedium) {
-      console.log('Encontrou vulnerabilidade de grau médio ou alto. Ação OK.');
-    } else {
-      console.log('Não encontrou vulnerabilidades.');
-    }
-  } catch (error) {
-    console.error('Erro ao analisar saída do OWASP ZAP:', error.message);
-    process.exit(1);
+  if (temVulnerabilidades) {
+    console.log('Encontradas vulnerabilidades de médio ou alto risco.');
+  } else {
+    console.log('Não foram encontradas vulnerabilidades de médio ou alto risco.');
   }
-};
-
-analisarVulnerabilidades();
+} else {
+  console.error('Formato do arquivo JSON de saída do OWASP ZAP inválido.');
+}
