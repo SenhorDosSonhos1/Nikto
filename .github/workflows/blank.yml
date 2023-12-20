@@ -12,15 +12,15 @@ jobs:
     - name: Checkout do Código
       uses: actions/checkout@v2
 
-    - name: Configurar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-
-    - name: Instalar Dependências
-      run: npm install
-
     - name: Executar OWASP ZAP
       run: |
-        npm run zap-command http://juice-shop.herokuapp.com > zap-output.json
+        # Substitua este comando com o comando real que você usa para executar o OWASP ZAP no Juice Shop
+        # Exemplo fictício:
+        # npm run zap-command http://juice-shop.herokuapp.com > zap-output.json
         echo '{"vulnerabilities": [{"name": "Vuln1", "severity": "High"}, {"name": "Vuln2", "severity": "Medium"}]}' > zap-output.json
+
+    - name: Analisar Saída do OWASP ZAP
+      run: |
+        # Aqui você pode adicionar seu código Node.js para analisar o arquivo JSON gerado pelo OWASP ZAP
+        # Substitua este comando com o comando real que você usa para executar sua análise
+        node analisar_vulnerabilidades.js zap-output.json
