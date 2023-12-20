@@ -23,4 +23,4 @@ jobs:
       run: |
         # Aqui você pode adicionar seu código Node.js para analisar o arquivo JSON gerado pelo OWASP ZAP
         # Substitua este comando com o comando real que você usa para executar sua análise
-        node analisar_vulnerabilidades.js zap-output.json
+        node analisar-vulnerabilidades.js zap-output.json
